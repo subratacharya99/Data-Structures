@@ -4,8 +4,8 @@ Creates a Singly Linked List with following functions:
 isEmpty() -> returns whether linked list is empty
 addToFront() -> adds element to head of list
 addToBack() -> adds element to back of list
-pop() -> removes element at head of list
-
+pop() -> removes element at front of list and returns data
+dequeue() -> removes element at back of list and returns data
 
 reverseList() -> returns reverse of list
 
@@ -66,6 +66,33 @@ class LinkedList:
                     current.next = Node(data)
                     return True
                 current = current.next
+    
+    def pop(self):
+        if self.isEmpty():
+            print("List is empty!")
+        else:
+            data = self.head.data
+            self.head = self.head.next
+            return data
+    
+    def dequeue(self):
+        if self.isEmpty():
+            print("List is empty!")
+        elif not self.head.next:
+            self.head = None
+        else:
+            current = self.head
+            while current.next:
+                nextNode = current.next
+                if not nextNode.next:
+                    data = nextNode.data
+                    current.next = None
+                    del nextNode
+                    return data
+                current = current.next
+               
+
+
 
 
 if __name__ == "__main__":
@@ -89,4 +116,9 @@ if __name__ == "__main__":
     print(m)
     m.addToBack(10)
     m.addToFront(12)
+
     print(m)
+    print(m.pop())
+    print(m.dequeue())
+    print(m)
+   
