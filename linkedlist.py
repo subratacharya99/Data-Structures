@@ -1,13 +1,21 @@
 """
 Practice of implementing Linked Lists in Python.
-Creates a Singly Linked List with following functions:
-isEmpty() -> returns whether linked list is empty
-addToFront() -> adds element to head of list
-addToBack() -> adds element to back of list
-pop() -> removes element at front of list and returns data
-dequeue() -> removes element at back of list and returns data
-getIndex() -> returns index of element in list (0-based)
-reverse() -> returns reverse of list
+Creates a Singly Linked List with following properties and functions:
+
+LinkedList has one property "head" which points to the head of the list
+Node has two properties, "data" which stores the data in the node,
+and "next" which points to the next node in the linked list
+
+    isEmpty() -> returns whether linked list is empty
+    addToFront() -> adds element to head of list
+    addToBack() -> adds element to back of list
+    copy() -> creates and returns a deep copy of list
+    insert() -> adds element at an index
+    remove() -> removes element in the middle of list
+    pop() -> removes element at front of list and returns data
+    dequeue() -> removes element at back of list and returns data
+    getIndex() -> returns index of element in list (0-based)
+    reverse() -> returns the reverse of the list
 
 """
 
@@ -70,6 +78,22 @@ class LinkedList:
                     current.next = Node(data)
                     return True
                 current = current.next
+
+    """O(n)"""
+    def copy(self):
+        if self.isEmpty():
+            return LinkedList()
+        else:
+            newList = LinkedList()
+            current = self.head
+            newList.head = Node(current.data)
+            ncurrent = newList.head
+            current = current.next
+            while current:
+                ncurrent.next = Node(current.data)
+                current = current.next
+                ncurrent= ncurrent.next
+            return newList
     
     """O(1)"""
     def pop(self):
@@ -113,7 +137,7 @@ class LinkedList:
             print("List is Empty")
             return None
         else:
-            revList = self
+            revList= self.copy()
             prev = None
             current = revList.head
             nex = current.next
@@ -154,7 +178,11 @@ if __name__ == "__main__":
     m.addToBack(10)
     m.addToFront(12)
 
-    print(m)
-    print(m.reverse())
-    print(m.getIndex(12))
+    # print(m)
+    # print(m.reverse())
+    # print(m)
+    print(l)
+    print(l.reverse())
+    print(l)
+    #print(m.getIndex(12))
    
