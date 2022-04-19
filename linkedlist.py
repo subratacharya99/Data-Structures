@@ -6,7 +6,7 @@ addToFront() -> adds element to head of list
 addToBack() -> adds element to back of list
 pop() -> removes element at front of list and returns data
 dequeue() -> removes element at back of list and returns data
-
+getIndex() -> returns index of element in list (0-based)
 reverse() -> returns reverse of list
 
 """
@@ -26,6 +26,7 @@ class LinkedList:
     def __init__(self):
         self.head = None
     
+    """O(n)"""
     def __repr__(self):
         if self.isEmpty():
             return "<Empty>"
@@ -42,11 +43,13 @@ class LinkedList:
             return "->".join(rep_array)
         
     
+    """O(1)"""
     def isEmpty(self):
         if self.head == None:
             return True
         return False
 
+    """O(1)"""
     def addToFront(self, data):
         if self.isEmpty():
             self.head = Node(data)
@@ -56,6 +59,7 @@ class LinkedList:
             self.head = temp
             del temp
 
+    """O(n)"""
     def addToBack(self, data):
         if self.isEmpty():
             self.head = Node(data)
@@ -67,6 +71,7 @@ class LinkedList:
                     return True
                 current = current.next
     
+    """O(1)"""
     def pop(self):
         if self.isEmpty():
             print("List is empty!")
@@ -75,6 +80,7 @@ class LinkedList:
             self.head = self.head.next
             return data
     
+    """O(n)"""
     def dequeue(self):
         if self.isEmpty():
             print("List is empty!")
@@ -91,6 +97,17 @@ class LinkedList:
                     return data
                 current = current.next
 
+    """O(n)"""
+    def getIndex(self, data):
+        current = self.head
+        count = 0
+        while current:
+            if current.data == data:
+                return count
+            count+=1
+            current = current.next
+
+    """O(n)"""
     def reverse(self):
         if self.isEmpty():
             print("List is Empty")
@@ -115,7 +132,7 @@ class LinkedList:
 
 
 
-
+"""Testing the Functions Below"""
 if __name__ == "__main__":
     n = Node(1)
     n2 = Node(2)
@@ -139,4 +156,5 @@ if __name__ == "__main__":
 
     print(m)
     print(m.reverse())
+    print(m.getIndex(12))
    
