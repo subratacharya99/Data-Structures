@@ -7,7 +7,7 @@ addToBack() -> adds element to back of list
 pop() -> removes element at front of list and returns data
 dequeue() -> removes element at back of list and returns data
 
-reverseList() -> returns reverse of list
+reverse() -> returns reverse of list
 
 """
 
@@ -90,7 +90,28 @@ class LinkedList:
                     del nextNode
                     return data
                 current = current.next
-               
+
+    def reverse(self):
+        if self.isEmpty():
+            print("List is Empty")
+            return None
+        else:
+            revList = self
+            prev = None
+            current = revList.head
+            nex = current.next
+            while current:
+                current.next = prev
+                prev = current
+                current = nex
+                if current.next:
+                    nex = current.next
+                else:
+                    current.next = prev
+                    revList.head = current
+                    return revList
+
+
 
 
 
@@ -113,12 +134,9 @@ if __name__ == "__main__":
     m.addToFront(4)
     m.addToFront(6)
     m.addToFront(8)
-    print(m)
     m.addToBack(10)
     m.addToFront(12)
 
     print(m)
-    print(m.pop())
-    print(m.dequeue())
-    print(m)
+    print(m.reverse())
    
