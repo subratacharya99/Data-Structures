@@ -10,8 +10,9 @@ and "next" which points to the next node in the linked list
     addToFront() -> adds element to head of list
     addToBack() -> adds element to back of list
     copy() -> creates and returns a deep copy of list
-    insert() -> adds element at an index
-    remove() -> removes element in the middle of list
+    insert() -> adds element at a given index
+    remove() -> removes all instances of element given the data
+    removeAtPosition() -> removes data at given index
     pop() -> removes element at front of list and returns data
     dequeue() -> removes element at back of list and returns data
     getIndex() -> returns index of element in list (0-based)
@@ -78,6 +79,60 @@ class LinkedList:
                     current.next = Node(data)
                     return True
                 current = current.next
+
+    def insert(self, data, index):
+        if index >= self.length():
+            self.addToBack(data)
+        elif index == 0:
+            self.addToFront(data)
+        else:
+            count = 0
+            current = self.head
+            while count < index:
+                if count == index-1:
+                    insertData = Node(data)
+                    nex = current.next
+                    current.next = insertData
+                    insertData.next = nex
+                    del insertData
+                current = current.next
+                count+=1
+
+    def remove(self, data):
+        if self.isEmpty():
+            print("List is Empty")
+        else:
+            prev = None
+            current = self.head
+
+            while current:
+                if current.data == data:
+                    if prev == None:
+                        self.head = current.next
+                        current = current.next
+                    else:
+                        prev.next = current.next
+                        current = current.next
+                else:
+                    prev = current
+                    current = current.next
+
+    def removeAtPosition(self, index):
+        if self.isEmpty():
+            print("List is Empty")
+        elif index >= self.length():
+            print("Index is out of Bounds")
+
+    def length(self):
+        if self.isEmpty():
+            return 0
+        else:
+            current = self.head
+            count = 0
+            while current:
+                current = current.next
+                count +=1
+            return count
 
     """O(n)"""
     def copy(self):
@@ -181,8 +236,10 @@ if __name__ == "__main__":
     # print(m)
     # print(m.reverse())
     # print(m)
+    l.insert(1.5, 1)
+    l.addToBack(1.5)
     print(l)
-    print(l.reverse())
+    l.remove(1.5)
     print(l)
     #print(m.getIndex(12))
    
