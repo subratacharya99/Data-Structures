@@ -12,12 +12,11 @@ and "next" which points to the next node in the linked list
     copy() -> creates and returns a deep copy of list
     insert() -> adds element at a given index
     remove() -> removes all instances of element given the data
-    removeAtPosition() -> removes data at given index
+    removeAtIndex() -> removes data at given index
     pop() -> removes element at front of list and returns data
     dequeue() -> removes element at back of list and returns data
     getIndex() -> returns index of element in list (0-based)
     reverse() -> returns the reverse of the list
-
 """
 
 class Node:
@@ -80,6 +79,7 @@ class LinkedList:
                     return True
                 current = current.next
 
+    """O(n)"""
     def insert(self, data, index):
         if index >= self.length():
             self.addToBack(data)
@@ -98,6 +98,7 @@ class LinkedList:
                 current = current.next
                 count+=1
 
+    """O(n)"""
     def remove(self, data):
         if self.isEmpty():
             print("List is Empty")
@@ -117,12 +118,23 @@ class LinkedList:
                     prev = current
                     current = current.next
 
-    def removeAtPosition(self, index):
+    """O(n)"""
+    def removeAtIndex(self, index):
         if self.isEmpty():
             print("List is Empty")
         elif index >= self.length():
             print("Index is out of Bounds")
+        else:
+            current = self.head
+            prev = None
+            count = 0
+            while count < index:
+                prev = current
+                current = current.next
+                count+= 1
+            prev.next = current.next
 
+    """O(n)"""
     def length(self):
         if self.isEmpty():
             return 0
@@ -240,6 +252,8 @@ if __name__ == "__main__":
     l.addToBack(1.5)
     print(l)
     l.remove(1.5)
+    print(l)
+    l.removeAtIndex(2)
     print(l)
     #print(m.getIndex(12))
    
