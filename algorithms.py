@@ -95,11 +95,14 @@ def fib(num):
     return ans
 
 
+def reverseString(string):
+    if len(string) <= 1:
+        return string
+    return string[-1] + reverseString(string[1:-1]) + string[0]
 
 
 if __name__ == '__main__':
     arr = [1,5,5,3,4,5,5,2,2,3,4,2,2,1,1,1,2,2,3,3,4,5]
     # quicksort2(arr, 0, len(arr)-1)
     # print(arr)
-
-    print(fib(29))
+    print(reverseString("hello"))
